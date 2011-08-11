@@ -56,7 +56,7 @@
     <properties>
         <componentName>quiz-rest</componentName>
         <jiraProjectName>QUIZREST</jiraProjectName>
-        <jiraComponentId></jiraComponentId>
+        <jiraComponentId>10575</jiraComponentId>
     </properties>
 
     <scm>
