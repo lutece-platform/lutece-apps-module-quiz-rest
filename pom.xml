@@ -11,7 +11,7 @@
     <groupId>fr.paris.lutece.plugins</groupId>
     <artifactId>module-quiz-rest</artifactId>
     <packaging>lutece-plugin</packaging>
-    <version>1.0.7</version>
+    <version>1.0.8-SNAPSHOT</version>
     <name>Lutece quiz rest module</name>
 
     <repositories>
@@ -60,8 +60,8 @@
     </properties>
 
     <scm>
-        <connection>scm:svn:http://dev.lutece.paris.fr/svn/lutece/portal/tags/module-quiz-rest-1.0.7</connection>
-        <developerConnection>scm:svn:https://dev.lutece.paris.fr/svn/lutece/portal/tags/module-quiz-rest-1.0.7</developerConnection>
-        <url>http://dev.lutece.paris.fr/viewvc/lutece/portal/tags/module-quiz-rest-1.0.7</url>
+        <connection>scm:svn:http://dev.lutece.paris.fr/svn/lutece/portal/trunk/plugins/collaboration/module-quiz-rest</connection>
+        <developerConnection>scm:svn:https://dev.lutece.paris.fr/svn/lutece/portal/trunk/plugins/collaboration/module-quiz-rest</developerConnection>
+        <url>http://dev.lutece.paris.fr/viewvc/lutece/portal/trunk/plugins/collaboration/module-quiz-rest</url>
     </scm>
 </project>
