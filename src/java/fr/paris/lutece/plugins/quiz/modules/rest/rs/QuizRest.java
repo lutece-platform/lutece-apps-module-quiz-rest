@@ -31,15 +31,17 @@
  *
  * License 1.0
  */
-
 package fr.paris.lutece.plugins.quiz.modules.rest.rs;
 
 import fr.paris.lutece.plugins.quiz.service.QuizService;
 import fr.paris.lutece.plugins.rest.service.RestConstants;
 import fr.paris.lutece.plugins.rest.util.json.JSONUtil;
 import fr.paris.lutece.portal.service.spring.SpringContextService;
+
 import java.util.Map;
+
 import javax.servlet.http.HttpServletResponse;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -47,13 +49,12 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
+
 /**
  * QuizRest
  */
-
-@Path( RestConstants.BASE_PATH + "quiz")
-
-public class QuizRest 
+@Path( RestConstants.BASE_PATH + "quiz" )
+public class QuizRest
 {
     private static final String BEAN_QUIZ_SERVICE = "quiz.quizService";
 
@@ -61,13 +62,16 @@ public class QuizRest
      * Return quiz list in json format
      * @return The JSON quiz list
      */
-    @GET @Path("")
-    @Produces( { MediaType.TEXT_PLAIN , MediaType.APPLICATION_JSON } )
-    public String getQuizListJson()
+    @GET
+    @Path( "" )
+    @Produces( {MediaType.TEXT_PLAIN,
+        MediaType.APPLICATION_JSON
+    } )
+    public String getQuizListJson(  )
     {
+        QuizService serviceQuiz = (QuizService) SpringContextService.getBean( BEAN_QUIZ_SERVICE );
 
-        QuizService serviceQuiz = (QuizService) SpringContextService.getBean(BEAN_QUIZ_SERVICE);
-        return JSONUtil.model2Json( serviceQuiz.getQuizList());
+        return JSONUtil.model2Json( serviceQuiz.getQuizList(  ) );
     }
 
     /**
@@ -75,34 +79,39 @@ public class QuizRest
      * @param strId The Quiz ID
      * @return JSON data of the quiz
      */
-    @GET @Path("{id}")
-    @Produces( { MediaType.TEXT_PLAIN , MediaType.APPLICATION_JSON } )
-
-    public String getQuizJson(@PathParam("id") String strId, @Context HttpServletResponse response )
+    @GET
+    @Path( "{id}" )
+    @Produces( {MediaType.TEXT_PLAIN,
+        MediaType.APPLICATION_JSON
+    } )
+    public String getQuizJson( @PathParam( "id" )
+    String strId, @Context
+    HttpServletResponse response )
     {
         String strResponse = "";
+
         try
         {
             strResponse = JSONUtil.model2Json( getQuiz( strId ) );
         }
-        catch( NumberFormatException e )
+        catch ( NumberFormatException e )
         {
             response.setStatus( HttpServletResponse.SC_BAD_REQUEST );
-            strResponse = JSONUtil.formatError("Invalid quiz id", 1);
+            strResponse = JSONUtil.formatError( "Invalid quiz id", 1 );
         }
-        catch( NullPointerException e )
+        catch ( NullPointerException e )
         {
             response.setStatus( HttpServletResponse.SC_NOT_FOUND );
-            strResponse = JSONUtil.formatError("Quiz id not found", 1);
+            strResponse = JSONUtil.formatError( "Quiz id not found", 1 );
         }
+
         return strResponse;
     }
 
     private Map getQuiz( String strId )
     {
-        QuizService serviceQuiz = (QuizService) SpringContextService.getBean(BEAN_QUIZ_SERVICE);
-        return serviceQuiz.getQuiz(  Integer.parseInt( strId ));
+        QuizService serviceQuiz = (QuizService) SpringContextService.getBean( BEAN_QUIZ_SERVICE );
+
+        return serviceQuiz.getQuiz( Integer.parseInt( strId ) );
     }
-
-
 }
